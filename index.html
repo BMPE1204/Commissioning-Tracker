@@ -79,13 +79,19 @@ textarea.comment-edit{font-size:11px;padding:4px 6px;border:1px solid #f0a500;bo
       </div>
     </div>
     <div class="prog-card">
-      <div class="prog-title">Phase Distribution</div>
-      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px">
-        <div class="phase-card" style="background:#f4f6f8;border:1px solid #d0d9e0"><div class="phase-num" style="color:#4f758b" id="phNR">74</div><div class="phase-lbl" style="color:#4f758b">Not started</div></div>
+      <div class="prog-title">Phase Distribution (ProTag Items Only)</div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:10px">
+        <div class="phase-card" style="background:#f4f6f8;border:1px solid #d0d9e0"><div class="phase-num" style="color:#4f758b" id="phNR">59</div><div class="phase-lbl" style="color:#4f758b">Not Started</div></div>
         <div class="phase-card" style="background:#f0f0f0;border:1px solid #ccc"><div class="phase-num" style="color:#333" id="phW">23</div><div class="phase-lbl" style="color:#333">White</div></div>
         <div class="phase-card" style="background:#ffc0cb;border:1px solid #f09595"><div class="phase-num" style="color:#7a0000" id="phP">0</div><div class="phase-lbl" style="color:#7a0000">Pink</div></div>
         <div class="phase-card" style="background:#ffff00;border:1px solid #f5c842"><div class="phase-num" style="color:#7a5200" id="phY">0</div><div class="phase-lbl" style="color:#7a5200">Yellow</div></div>
         <div class="phase-card" style="background:#92d050;border:1px solid #5a9e1a"><div class="phase-num" style="color:#1a3a00" id="phG">0</div><div class="phase-lbl" style="color:#1a3a00">Green</div></div>
+      </div>
+      <div class="prog-title" style="margin-top:4px">Safety Buyoff Items</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">
+        <div class="phase-card" style="background:#e0f3ff;border:1px solid #a0c8e8"><div class="phase-num" style="color:#005c8a" id="sbTotal">15</div><div class="phase-lbl" style="color:#005c8a">Total</div></div>
+        <div class="phase-card" style="background:#92d050;border:1px solid #5a9e1a"><div class="phase-num" style="color:#1a3a00" id="sbDone">0</div><div class="phase-lbl" style="color:#1a3a00">Complete</div></div>
+        <div class="phase-card" style="background:#f4f6f8;border:1px solid #d0d9e0"><div class="phase-num" style="color:#c40d3c" id="sbPending">15</div><div class="phase-lbl" style="color:#c40d3c">Pending</div></div>
       </div>
     </div>
   </div>
@@ -170,102 +176,184 @@ textarea.comment-edit{font-size:11px;padding:4px 6px;border:1px solid #f0a500;bo
 </div>
 
 <!-- STANDING AGENDA -->
-<div style="padding:12px 20px 0" id="agendaSection">
-  <div style="background:#1565c0;color:#fff;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:8px 14px;border-radius:4px 4px 0 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center" onclick="toggleSection(this)">
-    <span>📅 Weekly Standing Agenda — Barton Malow · Gresham Smith · Payne Crest · Best Mechanical</span>
-    <span class="chevron">▼</span>
-  </div>
-  <div class="section-body" style="border:1px solid #d0d9e0;border-top:none;border-radius:0 0 4px 4px;background:#fff;overflow:hidden">
-    <div id="agendaTableWrap"><table style="width:100%;border-collapse:collapse;font-size:12px">
-      <thead><tr style="background:#f4f6f8">
-        <th style="padding:7px 12px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;color:#4f758b;width:4%">#</th>
-        <th style="padding:7px 12px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;color:#4f758b;width:22%">Agenda Item</th>
-        <th style="padding:7px 12px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;color:#4f758b;width:12%">Lead</th>
-        <th style="padding:7px 12px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;color:#4f758b">Notes</th>
-      </tr></thead>
-      <tbody id="agendaTbody">
-        <tr style="border-bottom:0.5px solid #e8edf0">
-          <td style="padding:7px 12px;color:#4f758b;">1</td>
-          <td style="padding:7px 12px;font-weight:600;">Safety / Housekeeping</td>
-          <td style="padding:7px 12px;color:#4f758b;">Barton Malow</td>
-          <td style="padding:7px 12px;color:#4f758b;">Safety observations, site conditions, access issues, PPE compliance</td>
-        </tr>
-<tr style="background:#f9fafb;border-bottom:0.5px solid #e8edf0">
-          <td style="padding:7px 12px;color:#4f758b;background:#f9fafb;">2</td>
-          <td style="padding:7px 12px;font-weight:600;background:#f9fafb;">ProTag Status Review</td>
-          <td style="padding:7px 12px;color:#4f758b;background:#f9fafb;">Barton Malow</td>
-          <td style="padding:7px 12px;color:#4f758b;background:#f9fafb;">Review tracker — items moved between phases, blocked items, escalations. Update ProTag color status for completed phases.</td>
-        </tr>
-<tr style="border-bottom:0.5px solid #e8edf0">
-          <td style="padding:7px 12px;color:#4f758b;">3</td>
-          <td style="padding:7px 12px;font-weight:600;">Upcoming ProTag Events</td>
-          <td style="padding:7px 12px;color:#4f758b;">Barton Malow</td>
-          <td style="padding:7px 12px;color:#4f758b;">Confirm review dates on p833protag@ford.com. Required: Installation Supervisor, Controls Engineer, Ford Safety, VO Rep, Plant Launch Manager. Day shift only 7am–5pm.</td>
-        </tr>
-<tr style="background:#f9fafb;border-bottom:0.5px solid #e8edf0">
-          <td style="padding:7px 12px;color:#4f758b;background:#f9fafb;">4</td>
-          <td style="padding:7px 12px;font-weight:600;background:#f9fafb;">Phase Checklist Review</td>
-          <td style="padding:7px 12px;color:#4f758b;background:#f9fafb;">Barton Malow</td>
-          <td style="padding:7px 12px;color:#4f758b;background:#f9fafb;">White→Pink: arc flash/IP2X label, bus labeled, ECPL installed, temp tags, White ProTag sheet signed (5 parties), area cleaned.</td>
-        </tr>
-<tr style="border-bottom:0.5px solid #e8edf0">
-          <td style="padding:7px 12px;color:#4f758b;">5</td>
-          <td style="padding:7px 12px;font-weight:600;">ECPL Placard Status</td>
-          <td style="padding:7px 12px;color:#4f758b;">Barton Malow</td>
-          <td style="padding:7px 12px;color:#4f758b;">Placards received vs outstanding. Deadlines to CEC Controls. Must be installed before White→Pink review.</td>
-        </tr>
-<tr style="background:#f9fafb;border-bottom:0.5px solid #e8edf0">
-          <td style="padding:7px 12px;color:#4f758b;background:#f9fafb;">6</td>
-          <td style="padding:7px 12px;color:#c40d3c;font-weight:600;background:#f9fafb;">Commissioning Readiness</td>
-          <td style="padding:7px 12px;color:#4f758b;background:#f9fafb;">Gresham Smith</td>
-          <td style="padding:7px 12px;color:#c40d3c;font-weight:600;background:#f9fafb;">⚠ Commissioning begins after Pink ProTag — not Green. Confirm schedule aligns. No commissioning can overlap open White ProTag phases.</td>
-        </tr>
-<tr style="border-bottom:0.5px solid #e8edf0">
-          <td style="padding:7px 12px;color:#4f758b;">7</td>
-          <td style="padding:7px 12px;font-weight:600;">PFT / FPT Status</td>
-          <td style="padding:7px 12px;color:#4f758b;">Gresham Smith</td>
-          <td style="padding:7px 12px;color:#4f758b;">Confirm scope list received. Update In Scope / PFT / FPT status per equipment. Sequence: Install → PFT → FPT → Commissioning Complete.</td>
-        </tr>
-<tr style="background:#f9fafb;border-bottom:0.5px solid #e8edf0">
-          <td style="padding:7px 12px;color:#4f758b;background:#f9fafb;">8</td>
-          <td style="padding:7px 12px;font-weight:600;background:#f9fafb;">Electrical Installation</td>
-          <td style="padding:7px 12px;color:#4f758b;background:#f9fafb;">Payne Crest</td>
-          <td style="padding:7px 12px;color:#4f758b;background:#f9fafb;">Punchlist, open work, energizations, megger tests, wire labeling, arc flash labels installed.</td>
-        </tr>
-<tr style="border-bottom:0.5px solid #e8edf0">
-          <td style="padding:7px 12px;color:#4f758b;">9</td>
-          <td style="padding:7px 12px;font-weight:600;">Mechanical Installation</td>
-          <td style="padding:7px 12px;color:#4f758b;">Best Mechanical</td>
-          <td style="padding:7px 12px;color:#4f758b;">Equipment installation, gas connections, startup readiness, open submittals, O&amp;Ms.</td>
-        </tr>
-<tr style="background:#f9fafb;border-bottom:0.5px solid #e8edf0">
-          <td style="padding:7px 12px;color:#4f758b;background:#f9fafb;">10</td>
-          <td style="padding:7px 12px;font-weight:600;background:#f9fafb;">Submittals / Closeout Docs</td>
-          <td style="padding:7px 12px;color:#4f758b;background:#f9fafb;">Barton Malow</td>
-          <td style="padding:7px 12px;color:#4f758b;background:#f9fafb;">Outstanding O&amp;Ms, warranties, startup paperwork, spare parts, Safety Buyoff forms (awaiting VOSS 1.1.23.1.2 from Ford).</td>
-        </tr>
-<tr style="border-bottom:0.5px solid #e8edf0">
-          <td style="padding:7px 12px;color:#4f758b;">11</td>
-          <td style="padding:7px 12px;font-weight:600;">Open Issues / RFIs</td>
-          <td style="padding:7px 12px;color:#4f758b;">All</td>
-          <td style="padding:7px 12px;color:#4f758b;">Open design issues, coordination items, contractor questions, drawing conflicts.</td>
-        </tr>
-<tr style="background:#f9fafb;border-bottom:0.5px solid #e8edf0">
-          <td style="padding:7px 12px;color:#4f758b;background:#f9fafb;">12</td>
-          <td style="padding:7px 12px;font-weight:600;background:#f9fafb;">Action Items Review</td>
-          <td style="padding:7px 12px;color:#4f758b;background:#f9fafb;">Barton Malow</td>
-          <td style="padding:7px 12px;color:#4f758b;background:#f9fafb;">Prior meeting action items — status and owners confirmed.</td>
-        </tr>
+PE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ford LAP BP#1 — ProTag &amp; Commissioning Tracker</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Inter","Segoe UI",Arial,sans-serif;background:#f0f2f5;color:#2c3e50;font-size:12px}
+@media print{.no-print{display:none!important}body{background:#fff}.area-section{break-inside:avoid}}
 
-      </tbody>
-    </table></div>
-    <div style="padding:8px 14px;border-top:1px solid #e8edf0;display:none;align-items:center;gap:8px" id="agendaAddRow">
-      <button onclick="addAgendaItem()" style="font-size:11px;padding:5px 12px;border:1px solid #a5bac9;border-radius:3px;background:#fff;cursor:pointer;color:#00263a;font-weight:700">+ Add Agenda Item</button>
-      <span style="font-size:10px;color:#a5bac9">Click on any cell to edit. Unlock the tracker to add/remove items.</span>
+/* Form elements */
+select{font-size:11px;padding:4px 8px;border:1px solid #d0d7de;border-radius:4px;background:#fff;color:#2c3e50;cursor:pointer}
+select.edit-sel{background:#fff8e1;border-color:#f0a500}
+textarea.comment-edit{font-size:11px;padding:4px 6px;border:1px solid #f0a500;border-radius:4px;background:#fff8e1;width:100%;min-height:34px;resize:vertical;font-family:"Segoe UI",Arial,sans-serif;color:#2c3e50}
+
+/* Checklist */
+.checkbox-wrap{display:flex;flex-direction:column;gap:3px}
+.chk-row{display:flex;align-items:center;gap:5px;font-size:10px;color:#6b7a8d}
+.chk-row.done{color:#27ae60;text-decoration:line-through}
+.chk-row input[type=checkbox]{cursor:pointer;width:13px;height:13px;accent-color:#3b82f6}
+.chk-row.locked-chk input{cursor:default}
+
+/* Progress snapshot */
+.prog-section{padding:16px 20px;background:#fff;border-bottom:1px solid #e1e4e8;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.prog-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.prog-card{background:#f8f9fb;border-radius:6px;padding:14px 16px;border:1px solid #e1e4e8}
+.prog-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#6b7a8d;margin-bottom:8px}
+.prog-bar-wrap{background:#e1e4e8;border-radius:3px;height:28px;width:100%;position:relative;overflow:hidden;display:flex;align-items:center}
+.prog-bar{height:100%;border-radius:3px;transition:width .4s ease;position:relative;display:flex;align-items:center;min-width:0}
+.prog-bar-label{position:absolute;left:8px;top:50%;transform:translateY(-50%);font-size:11px;font-weight:600;color:#fff;white-space:nowrap;z-index:1}
+.prog-bar-label-out{font-size:10px;color:#6b7a8d;margin-top:4px;text-align:right}
+.prog-stat-row{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.prog-stat{background:#fff;border-radius:4px;padding:5px 10px;font-size:10px;color:#6b7a8d;border:1px solid #e1e4e8;flex:1;min-width:60px;text-align:center}
+.prog-stat strong{display:block;font-size:14px;font-weight:700;color:#2c3e50;margin-bottom:1px}
+.phase-overview{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.phase-card{border-radius:5px;padding:8px 10px;text-align:center}
+.phase-num{font-size:20px;font-weight:700;line-height:1}
+.phase-lbl{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-top:3px}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div style="background:#1565c0;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+  <div style="display:flex;align-items:center;gap:16px">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 432 227" style="height:44px;width:auto"><path d="m251.9,86.7c0,1.7,1.4,3,3.1,3l10.8.01c.59,0,1.07.46,1.07,1.03l-.02,13.52c0,.57-.48,1.03-1.08,1.03l-15.08-.01c-10.22-.01-18.49-7.98-18.48-17.79l.08-72.79c0-.57.48-1.03,1.08-1.03l17.2.02c.59,0,1.07.46,1.07,1.03l-.02,15.71c0,.57.48,1.03,1.07,1.03l13.16.01c.59,0,1.07.46,1.07,1.04l-.01,13.24c0,.57-.48,1.03-1.08,1.03l-12.87-.01c-.6,0-1.08.46-1.08,1.03l-.04,38.89Z" fill="#fff"/><path d="m319.3,47.9l-18.35-.02c-2.28,0-3.13.82-3.13,3l-.04,35c0,2.19.85,3.01,3.13,3.01l18.36.02c2.28,0,3.13-.82,3.13-3l.04-35c0-2.19-.85-3.01-3.13-3.01m22.76,1.39l-.04,38.28c-.01,12.17-5.85,17.77-18.52,17.75l-26.89-.03c-12.66-.01-18.49-5.62-18.48-17.79l.04-38.28c.01-12.17,5.85-17.77,18.52-17.76l26.89.03c12.66.01,18.49,5.62,18.48,17.79" fill="#fff"/><path d="m61.5,89c3.18,0,4.09-1.67,4.25-10.03.01-.66.02-6.05.02-6.8v-1.15c.01-11.21-.7-11.76-4.26-11.76l-27.38-.03c-.59,0-1.08.46-1.08,1.03l-.02,27.68c0,.57.48,1.03,1.07,1.04l27.38.03Zm-1.09-46.42c3.51.01,4.25-.79,4.28-9.9v-5.03c.01-9.43-.7-10.12-4.26-10.12l-26.24-.03c-.59,0-1.07.46-1.08,1.03l-.02,22.99c0,.57.48,1.03,1.07,1.04l26.24.02ZM11.5,16.1l-10.37-.01c-.59,0-1.07-.46-1.07-1.03L.07,1c0-.57.48-1.03,1.08-1.03l64.09.07c13.52.01,19.91,6.17,19.89,25.58v6.68c-.28,10.53-2.79,15.71-8.96,19.18,7.11,3.29,10.09,8.49,10.08,22.29v5.2c-.13,20.09-6.55,26.13-19.95,26.12l-65.23-.07c-.59,0-1.07-.46-1.07-1.03l.01-14.06c0-.57.48-1.03,1.08-1.03l10.37.01c.59,0,1.08-.46,1.08-1.03l.07-70.73c0-.57-.48-1.03-1.07-1.03" fill="#fff"/><path d="m195.98,137.63l-59.72-.04c-.65,0-1.18-.51-1.18-1.13l.01-13.83c0-.62.53-1.13,1.18-1.13l59.72.04c.65,0,1.18.51,1.18,1.13l-.02,13.83c0,.62-.53,1.13-1.18,1.13" fill="#e35205"/><path d="m431.34,137.85l-176.28-.17c-.65,0-1.18-.51-1.18-1.13l.01-13.83c0-.62.53-1.13,1.18-1.13l176.28.17c.65,0,1.18.51,1.18,1.13l-.01,13.83c0,.62-.53,1.13-1.18,1.13" fill="#e35205"/></svg>
+    <div>
+      <div style="color:#fff;font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:.04em">Ford LAP BP#1 — ProTag &amp; Commissioning Tracker</div>
+      <div style="color:#a5bac9;font-size:11px;margin-top:2px">Weekly Meeting | Gresham Smith · Payne Crest · Best Mechanical | GC: Barton Malow</div>
     </div>
-
+  </div>
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+    <span id="saveMsg" style="font-size:11px;color:#92d050;font-weight:700"></span>
+    <span id="lastSavedLbl" style="font-size:10px;color:#a5bac9"></span>
+    <button id="lockBtn" onclick="toggleLock()" style="background:#e35205;color:#fff;border:none;padding:7px 16px;border-radius:4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;transition:all .15s;" onmousedown="this.style.transform='scale(0.96)'" onmouseup="this.style.transform='scale(1)'">🔒 Locked — Click to Edit</button>
+    <button onclick="window.print()" class="no-print" style="background:#e35205;color:#fff;border:none;padding:8px 16px;border-radius:3px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;cursor:pointer">🖨 Print / PDF</button>
+    <div style="color:#a5bac9;font-size:11px;text-align:right">Data: 06/16/2026<br>Project Turnover: 01/08/2027</div>
   </div>
 </div>
+<div style="height:3px;background:#1976d2"></div>
+
+
+<!-- PROGRESS DASHBOARD -->
+<div class="prog-section" id="progressDashboard">
+  <div style="font-size:13px;font-weight:700;color:#00263a;text-transform:uppercase;letter-spacing:.04em;margin-bottom:12px">Project Snapshot &mdash; ProTag &amp; Commissioning Progress</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+    <div class="prog-card">
+      <div class="prog-title">Overall ProTag Progress (97 items)</div>
+      <div class="prog-bar-wrap"><div class="prog-bar" id="overallBarFill" style="width:24%;background:#e35205"><span class="prog-bar-label">23 of 97 started — 24%</span></div></div>
+      <div class="prog-bar-label-out" id="overallBarLabel" style="display:none"></div>
+      <div class="prog-stat-row" style="margin-top:8px">
+        <div class="prog-stat"><strong style="color:#c40d3c">82</strong>ProTag</div>
+        <div class="prog-stat"><strong style="color:#005c8a">15</strong>Safety Buyoff</div>
+        <div class="prog-stat"><strong style="color:#ba7517" id="startedStat">23</strong>Started</div>
+        <div class="prog-stat"><strong style="color:#3a6018" id="greenStat">0</strong>Complete</div>
+      </div>
+    </div>
+    <div class="prog-card">
+      <div class="prog-title">Phase Distribution (ProTag Items Only)</div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:10px">
+        <div class="phase-card" style="background:#f4f6f8;border:1px solid #d0d9e0"><div class="phase-num" style="color:#4f758b" id="phNR">59</div><div class="phase-lbl" style="color:#4f758b">Not Started</div></div>
+        <div class="phase-card" style="background:#f0f0f0;border:1px solid #ccc"><div class="phase-num" style="color:#333" id="phW">23</div><div class="phase-lbl" style="color:#333">White</div></div>
+        <div class="phase-card" style="background:#ffc0cb;border:1px solid #f09595"><div class="phase-num" style="color:#7a0000" id="phP">0</div><div class="phase-lbl" style="color:#7a0000">Pink</div></div>
+        <div class="phase-card" style="background:#ffff00;border:1px solid #f5c842"><div class="phase-num" style="color:#7a5200" id="phY">0</div><div class="phase-lbl" style="color:#7a5200">Yellow</div></div>
+        <div class="phase-card" style="background:#92d050;border:1px solid #5a9e1a"><div class="phase-num" style="color:#1a3a00" id="phG">0</div><div class="phase-lbl" style="color:#1a3a00">Green</div></div>
+      </div>
+      <div class="prog-title" style="margin-top:4px">Safety Buyoff Items</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">
+        <div class="phase-card" style="background:#e0f3ff;border:1px solid #a0c8e8"><div class="phase-num" style="color:#005c8a" id="sbTotal">15</div><div class="phase-lbl" style="color:#005c8a">Total</div></div>
+        <div class="phase-card" style="background:#92d050;border:1px solid #5a9e1a"><div class="phase-num" style="color:#1a3a00" id="sbDone">0</div><div class="phase-lbl" style="color:#1a3a00">Complete</div></div>
+        <div class="phase-card" style="background:#f4f6f8;border:1px solid #d0d9e0"><div class="phase-num" style="color:#c40d3c" id="sbPending">15</div><div class="phase-lbl" style="color:#c40d3c">Pending</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="prog-card" style="margin-bottom:16px">
+    <div class="prog-title">Progress by Area</div>
+    <div id="areaProgressBars"><div style="display:flex;gap:10px;margin-bottom:8px;flex-wrap:wrap"><span style="display:flex;align-items:center;gap:4px;font-size:10px;color:#6b7a8d"><span style="width:12px;height:12px;border-radius:2px;background:#92d050;flex-shrink:0;box-shadow:inset 0 0 0 1.5px #2d7a00"></span>Green</span><span style="display:flex;align-items:center;gap:4px;font-size:10px;color:#6b7a8d"><span style="width:12px;height:12px;border-radius:2px;background:#ffff00;flex-shrink:0;box-shadow:inset 0 0 0 1.5px #8a8000"></span>Yellow</span><span style="display:flex;align-items:center;gap:4px;font-size:10px;color:#6b7a8d"><span style="width:12px;height:12px;border-radius:2px;background:#ffc0cb;flex-shrink:0;box-shadow:inset 0 0 0 1.5px #a00000"></span>Pink</span><span style="display:flex;align-items:center;gap:4px;font-size:10px;color:#6b7a8d"><span style="width:12px;height:12px;border-radius:2px;background:#f0f0f0;flex-shrink:0;box-shadow:inset 0 0 0 1.5px #333"></span>White</span><span style="display:flex;align-items:center;gap:4px;font-size:10px;color:#6b7a8d"><span style="width:12px;height:12px;border-radius:2px;background:#d8e4ee;flex-shrink:0;box-shadow:inset 0 0 0 1.5px #a0b0c0"></span>Not Started</span></div><div style="display:flex;align-items:center;gap:10px;margin-bottom:6px"><div style="width:120px;flex-shrink:0"><div style="font-size:10px;font-weight:700;color:#2c3e50">Angled Docks</div><div style="font-size:9px;color:#6b7a8d">Turnover: 06/29/26</div></div><div style="flex:1;background:#d8e4ee;border-radius:3px;height:28px;overflow:hidden;position:relative;display:flex"><div style="width:33%;height:100%;background:#f0f0f0;flex-shrink:0;box-shadow:inset 0 0 0 1.5px #333"></div><div style="width:67%;height:100%;background:#d8e4ee;flex-shrink:0;box-shadow:inset 0 0 0 1.5px #a0b0c0"></div><span style="position:absolute;left:8px;top:50%;transform:translateY(-50%);font-size:10px;font-weight:600;color:#1a1a1a;white-space:nowrap;text-shadow:0 1px 2px rgba(255,255,255,.5);z-index:2">0/3 (0%) complete</span></div></div><div style="display:flex;align-items:center;gap:10px;margin-bottom:6px"><div style="width:120px;flex-shrink:0"><div style="font-size:10px;font-weight:700;color:#2c3e50">Restroom Rebuilds</div><div style="font-size:9px;color:#6b7a8d">Turnover: 07/02/26</div></div><div style="flex:1;background:#d8e4ee;border-radius:3px;height:28px;overflow:hidden;position:relative;display:flex"><div style="width:100%;height:100%;background:#d8e4ee;flex-shrink:0;box-shadow:inset 0 0 0 1.5px #a0b0c0"></div><span style="position:absolute;left:8px;top:50%;transform:translateY(-50%);font-size:10px;font-weight:600;color:#1a1a1a;white-space:nowrap;text-shadow:0 1px 2px rgba(255,255,255,.5);z-index:2">0/4 (0%) complete</span></div></div><div style="display:flex;align-items:center;gap:10px;margin-bottom:6px"><div style="width:120px;flex-shrink:0"><div style="font-size:10px;font-weight:700;color:#2c3e50">EV Charging Canopy</div><div style="font-size:9px;color:#6b7a8d">Turnover: 07/06/26</div></div><div style="flex:1;background:#d8e4ee;border-radius:3px;height:28px;overflow:hidden;position:relative;display:flex"><div style="width:100%;height:100%;background:#f0f0f0;flex-shrink:0;box-shadow:inset 0 0 0 1.5px #333"></div><span style="position:absolute;left:8px;top:50%;transform:translateY(-50%);font-size:10px;font-weight:600;color:#1a1a1a;white-space:nowrap;text-shadow:0 1px 2px rgba(255,255,255,.5);z-index:2">0/22 (0%) complete</span></div></div><div style="display:flex;align-items:center;gap:10px;margin-bottom:6px"><div style="width:120px;flex-shrink:0"><div style="font-size:10px;font-weight:700;color:#2c3e50">Low Boy Docks</div><div style="font-size:9px;color:#6b7a8d">Turnover: 10/15/26</div></div><div style="flex:1;background:#d8e4ee;border-radius:3px;height:28px;overflow:hidden;position:relative;display:flex"><div style="width:100%;height:100%;background:#d8e4ee;flex-shrink:0;box-shadow:inset 0 0 0 1.5px #a0b0c0"></div><span style="position:absolute;left:8px;top:50%;transform:translateY(-50%);font-size:10px;font-weight:600;color:#1a1a1a;white-space:nowrap;text-shadow:0 1px 2px rgba(255,255,255,.5);z-index:2">0/3 (0%) complete</span></div></div><div style="display:flex;align-items:center;gap:10px;margin-bottom:6px"><div style="width:120px;flex-shrink:0"><div style="font-size:10px;font-weight:700;color:#2c3e50">MiniMart</div><div style="font-size:9px;color:#6b7a8d">Turnover: 10/15/26</div></div><div style="flex:1;background:#d8e4ee;border-radius:3px;height:28px;overflow:hidden;position:relative;display:flex"><div style="width:100%;height:100%;background:#d8e4ee;flex-shrink:0;box-shadow:inset 0 0 0 1.5px #a0b0c0"></div><span style="position:absolute;left:8px;top:50%;transform:translateY(-50%);font-size:10px;font-weight:600;color:#1a1a1a;white-space:nowrap;text-shadow:0 1px 2px rgba(255,255,255,.5);z-index:2">0/8 (0%) complete</span></div></div><div style="display:flex;align-items:center;gap:10px;margin-bottom:6px"><div style="width:120px;flex-shrink:0"><div style="font-size:10px;font-weight:700;color:#2c3e50">10K</div><div style="font-size:9px;color:#6b7a8d">Turnover: 01/08/27</div></div><div style="flex:1;background:#d8e4ee;border-radius:3px;height:28px;overflow:hidden;position:relative;display:flex"><div style="width:100%;height:100%;background:#d8e4ee;flex-shrink:0;box-shadow:inset 0 0 0 1.5px #a0b0c0"></div><span style="position:absolute;left:8px;top:50%;transform:translateY(-50%);font-size:10px;font-weight:600;color:#1a1a1a;white-space:nowrap;text-shadow:0 1px 2px rgba(255,255,255,.5);z-index:2">0/18 (0%) complete</span></div></div><div style="display:flex;align-items:center;gap:10px;margin-bottom:6px"><div style="width:120px;flex-shrink:0"><div style="font-size:10px;font-weight:700;color:#2c3e50">30K</div><div style="font-size:9px;color:#6b7a8d">Turnover: 01/08/27</div></div><div style="flex:1;background:#d8e4ee;border-radius:3px;height:28px;overflow:hidden;position:relative;display:flex"><div style="width:100%;height:100%;background:#d8e4ee;flex-shrink:0;box-shadow:inset 0 0 0 1.5px #a0b0c0"></div><span style="position:absolute;left:8px;top:50%;transform:translateY(-50%);font-size:10px;font-weight:600;color:#1a1a1a;white-space:nowrap;text-shadow:0 1px 2px rgba(255,255,255,.5);z-index:2">0/39 (0%) complete</span></div></div></div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+    <div class="prog-card">
+      <div class="prog-title">ECPL Placard Status</div>
+      <div class="prog-bar-wrap"><div class="prog-bar" id="ecplBarFill" style="width:0%;background:#185fa5"><span class="prog-bar-label">0 of 97 final placards installed — 0%</span></div></div>
+      <div class="prog-bar-label-out" id="ecplBarLabel" style="display:none"></div>
+      <div class="prog-stat-row" style="margin-top:8px">
+        <div class="prog-stat"><strong style="color:#3a6018" id="plRcvStat">0</strong>Final Installed</div>
+        <div class="prog-stat"><strong style="color:#ba7517" id="plDraftStat">0</strong>Draft Installed</div>
+        <div class="prog-stat"><strong style="color:#c40d3c" id="plOutStat">97</strong>Outstanding</div>
+      </div>
+    </div>
+    <div class="prog-card">
+      <div class="prog-title">Phase Checklist Completion</div>
+      <div style="background:#d8e4ee;border-radius:3px;height:28px;overflow:hidden;position:relative"><div id="ckBarFill" style="width:0%;height:100%;background:#ba7517;position:relative;transition:width .4s"></div></div>
+      <div class="prog-bar-label-out" id="ckBarLabel" style="display:none"></div>
+      <div class="prog-stat-row" style="margin-top:8px">
+        <div class="prog-stat"><strong id="ckDoneStat">0</strong>Complete</div>
+        <div class="prog-stat"><strong style="color:#c40d3c" id="ckRemStat">738</strong>Remaining</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div style="padding:0 20px 16px;background:#fff;border-bottom:1px solid #e1e4e8">
+  <div class="prog-card">
+    <div class="prog-title">Commissioning Sequence</div>
+    <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:2px">
+      <span style="background:#00263a;color:#fff;border-radius:10px;padding:3px 10px;font-size:10px;font-weight:700">1. Install</span>
+      <span style="color:#6b7a8d;font-weight:700">&#8594;</span>
+      <span style="background:#f0f0f0;color:#333;border-radius:10px;padding:3px 10px;font-size:10px;font-weight:700;border:1px solid #ccc">2. White ProTag</span>
+      <span style="color:#6b7a8d;font-weight:700">&#8594;</span>
+      <span style="background:#ffc0cb;color:#7a0000;border-radius:10px;padding:3px 10px;font-size:10px;font-weight:700;border:1px solid #f09595">3. Pink ProTag</span>
+      <span style="color:#6b7a8d;font-weight:700">&#8594;</span>
+      <span style="background:#009ade;color:#fff;border-radius:10px;padding:3px 10px;font-size:10px;font-weight:700">4. Gresham Smith Commissioning</span>
+      <span style="color:#6b7a8d;font-weight:700">&#8594;</span>
+      <span style="background:#7b4fa6;color:#fff;border-radius:10px;padding:3px 10px;font-size:10px;font-weight:700">5. Pre-Functional Checklist (PFC)</span>
+      <span style="color:#6b7a8d;font-weight:700">&#8594;</span>
+      <span style="background:#e35205;color:#fff;border-radius:10px;padding:3px 10px;font-size:10px;font-weight:700">6. Functional Performance Test (FPT)</span>
+      <span style="color:#6b7a8d;font-weight:700">&#8594;</span>
+      <span style="background:#ffff00;color:#7a5200;border-radius:10px;padding:3px 10px;font-size:10px;font-weight:700;border:1px solid #f5c842">7. Yellow ProTag</span>
+      <span style="color:#6b7a8d;font-weight:700">&#8594;</span>
+      <span style="background:#92d050;color:#1a3a00;border-radius:10px;padding:3px 10px;font-size:10px;font-weight:700;border:1px solid #5a9e1a">8. Green ProTag</span>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- KPIs -->
+
+
+<!-- TOOLBAR -->
+<div style="display:flex;align-items:center;gap:10px;padding:10px 24px;background:#fff;border-bottom:1px solid #d0d9e0;flex-wrap:wrap" class="no-print">
+  <span style="font-size:11px;font-weight:700;color:#4f758b;text-transform:uppercase">Filter:</span>
+  <select onchange="applyFilters()" id="fArea">
+    <option value="all">All Areas</option>
+    <option value="Angled Docks">Angled Docks</option>
+    <option value="Restroom Rebuilds">Restroom Rebuilds</option>
+    <option value="EV Charging Canopy">EV Charging Canopy</option>
+    <option value="Low Boy Docks">Low Boy Docks</option>
+    <option value="MiniMart">MiniMart</option>
+    <option value="10K">10K</option>
+    <option value="30K">30K</option>
+  </select>
+  <select onchange="applyFilters()" id="fType">
+    <option value="all">All Types</option>
+    <option value="YES">ProTag</option>
+    <option value="SAFETY BUYOFF">Safety Buyoff</option>
+  </select>
+  <button onclick="expandAll()" style="font-size:11px;padding:5px 12px;border:1px solid #a5bac9;border-radius:3px;background:#fff;cursor:pointer">Expand All</button>
+  <button onclick="collapseAll()" style="font-size:11px;padding:5px 12px;border:1px solid #a5bac9;border-radius:3px;background:#fff;cursor:pointer">Collapse All</button>
+  <span style="font-size:11px;color:#a5bac9;margin-left:auto">Last updated: 06/16/2026</span>
+</div>
+
+
 
 <!-- AREA SECTIONS -->
 <div style="padding:12px 20px" id="areaContainer">
@@ -1062,11 +1150,18 @@ function renderProgress() {
 
   // Update phase distribution cards
   const setEl = (id, v) => { const el=document.getElementById(id); if(el) el.textContent=v; };
-  setEl("phNR", d.filter(r=>r.protag==="NOT RECEIVED").length);
-  setEl("phW",  d.filter(r=>r.protag==="WHITE").length);
-  setEl("phP",  d.filter(r=>r.protag==="PINK").length);
-  setEl("phY",  d.filter(r=>r.protag==="YELLOW").length);
-  setEl("phG",  d.filter(r=>r.protag==="GREEN").length);
+  // Phase distribution — ProTag items only
+  const ptItems = d.filter(r=>r.req==="YES");
+  setEl("phNR", ptItems.filter(r=>r.protag==="NOT RECEIVED").length);
+  setEl("phW",  ptItems.filter(r=>r.protag==="WHITE").length);
+  setEl("phP",  ptItems.filter(r=>r.protag==="PINK").length);
+  setEl("phY",  ptItems.filter(r=>r.protag==="YELLOW").length);
+  setEl("phG",  ptItems.filter(r=>r.protag==="GREEN").length);
+  // Safety Buyoff stats
+  const sbItems = d.filter(r=>r.req==="SAFETY BUYOFF");
+  setEl("sbTotal",   sbItems.length);
+  setEl("sbDone",    sbItems.filter(r=>r.sb===true).length);
+  setEl("sbPending", sbItems.filter(r=>r.sb!==true).length);
 
   // Update overall bar
   const started  = d.filter(r=>r.protag!=="NOT RECEIVED" || r.sb===true).length;
@@ -1091,13 +1186,23 @@ function renderProgress() {
   const plLbl  = document.getElementById("ecplBarLabel");
   const plRcv  = document.getElementById("plRcvStat");
   const plOut  = document.getElementById("plOutStat");
+  const draft    = d.filter(r=>r.placards==="DRAFT INSTALLED").length;
+  const combined = rcv + draft;
+  const combPct  = total ? Math.round(combined/total*100) : 0;
+  const plDraft  = document.getElementById("plDraftStat");
   if(plFill) {
-    plFill.style.width=plPct+"%";
-    plFill.innerHTML=plPct>5?`<span class="prog-bar-label">${rcv} of ${total} final placards installed — ${plPct}%</span>`:"";
+    // Bar shows combined (Draft + Final) progress, split into two segments
+    const finalW = total ? Math.round(rcv/total*100) : 0;
+    const draftW = total ? Math.round(draft/total*100) : 0;
+    plFill.style.width = "100%";
+    plFill.style.background = "transparent";
+    plFill.innerHTML = `
+      <div style="width:${finalW}%;height:100%;background:#92d050;flex-shrink:0"></div>
+      <div style="width:${draftW}%;height:100%;background:#fff3cd;flex-shrink:0;border-left:${draftW>0?'1px solid #f5c842':'none'}"></div>
+      ${combPct>5?`<span class="prog-bar-label" style="color:${finalW>15?"#1a3a00":"#2c3e50"}">${combined} of ${total} placards (${combPct}%)</span>`:""}
+    `;
   }
-  if(plLbl) { plLbl.style.display="none"; }
-  const draft   = d.filter(r=>r.placards==="DRAFT INSTALLED").length;
-  const plDraft = document.getElementById("plDraftStat");
+  if(plLbl)   { plLbl.style.display="none"; }
   if(plRcv)   plRcv.textContent   = rcv;
   if(plDraft) plDraft.textContent = draft;
   if(plOut)   plOut.textContent   = total - rcv - draft;
@@ -1114,11 +1219,11 @@ function renderProgress() {
       const idxs  = d.filter(r=>r.area===area);
       const tot   = idxs.length; if(!tot) return;
       const col   = AREA_COLS[area]; const sc = AREA_SCS2[area];
-      const green = idxs.filter(r=>r.protag==="GREEN").length;
+      const green = idxs.filter(r=>r.protag==="GREEN" || r.sb===true).length;
       const yel   = idxs.filter(r=>r.protag==="YELLOW").length;
       const pink  = idxs.filter(r=>r.protag==="PINK").length;
       const white = idxs.filter(r=>r.protag==="WHITE").length;
-      const nr    = idxs.filter(r=>r.protag==="NOT RECEIVED").length;
+      const nr    = idxs.filter(r=>r.protag==="NOT RECEIVED" && r.sb!==true).length;
       const pctD  = Math.round(green/tot*100);
       const segs  = [[green,"#92d050","inset 0 0 0 1.5px #2d7a00"],[yel,"#ffff00","inset 0 0 0 1.5px #8a8000"],[pink,"#ffc0cb","inset 0 0 0 1.5px #a00000"],[white,"#f0f0f0","inset 0 0 0 1.5px #333"],[nr,"#d8e4ee","inset 0 0 0 1.5px #a0b0c0"]];
       const visSegs = segs.filter(s=>s[0]>0);
@@ -1159,11 +1264,9 @@ function renderProgress() {
     ckFill.style.width = ckPct+"%";
     ckFill.innerHTML = ckPct>5 ? `<span style="position:absolute;left:8px;top:50%;transform:translateY(-50%);font-size:11px;font-weight:600;color:#fff;white-space:nowrap">${doneChecks} of ${totalChecks} items complete — ${ckPct}%</span>` : "";
   }
-  if(ckD) ckD.textContent = doneChecks;
-  if(ckR) ckR.textContent = totalChecks - doneChecks;
   if(ckLbl) ckLbl.style.display = "none";
-  if(ckD)    ckD.textContent = doneChecks;
-  if(ckR)    ckR.textContent = totalChecks - doneChecks;
+  if(ckD)   ckD.textContent = doneChecks;
+  if(ckR)   ckR.textContent = totalChecks - doneChecks;
 }
 
 
