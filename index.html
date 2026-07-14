@@ -95,12 +95,12 @@ textarea.comment-edit{font-size:11px;padding:4px 6px;border:1px solid #f0a500;bo
   </div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
     <div class="prog-card">
-      <div class="prog-title">ECPL Placard Status</div>
-      <div class="prog-bar-wrap"><div class="prog-bar" id="ecplBarFill" style="width:26%;background:#185fa5"><span class="prog-bar-label">25 of 97 placards received — 26%</span></div></div>
+      <div class="prog-title">ECPL Placard Status (Final Installed)</div>
+      <div class="prog-bar-wrap"><div class="prog-bar" id="ecplBarFill" style="width:0%;background:#185fa5"><span class="prog-bar-label">0 of 97 final placards installed — 0%</span></div></div>
       <div class="prog-bar-label-out" id="ecplBarLabel" style="display:none"></div>
       <div class="prog-stat-row" style="margin-top:8px">
-        <div class="prog-stat"><strong style="color:#3a6018" id="plRcvStat">25</strong>Received</div>
-        <div class="prog-stat"><strong style="color:#c40d3c" id="plOutStat">72</strong>Outstanding</div>
+        <div class="prog-stat"><strong style="color:#3a6018" id="plRcvStat">0</strong>Final Installed</div>
+        <div class="prog-stat"><strong style="color:#c40d3c" id="plOutStat">97</strong>Outstanding</div>
       </div>
     </div>
     <div class="prog-card">
@@ -371,7 +371,7 @@ textarea.comment-edit{font-size:11px;padding:4px 6px;border:1px solid #f0a500;bo
 // DATA
 // ============================================================
 const PROTAG_OPTS  = ["NOT RECEIVED","WHITE","PINK","YELLOW","GREEN"];
-const STATUS_OPTS  = ["NOT RECEIVED","RECEIVED","N/A"];
+const STATUS_OPTS  = ["NOT RECEIVED","Draft Received","Draft Installed","Final Placard Installed"];
 const collapsedAreas = {"Angled Docks":true,"Restroom Rebuilds":true,"EV Charging Canopy":true,"Low Boy Docks":true,"MiniMart":true,"10K":true,"30K":true};
 const AREA_ORDER   = ["Angled Docks","Restroom Rebuilds","EV Charging Canopy","Low Boy Docks","MiniMart","10K","30K"];
 const AREA_COLORS  = {"Angled Docks":"#c40d3c","Restroom Rebuilds":"#e35205","EV Charging Canopy":"#e35205","Low Boy Docks":"#ba7517","MiniMart":"#ba7517","10K":"#185fa5","30K":"#185fa5"};
@@ -663,7 +663,7 @@ function renderKPIs() {
     {val:d.filter(r=>r.req==="YES").length,             lbl:"ProTag",    color:"#c40d3c"},
     {val:d.filter(r=>r.req==="SAFETY BUYOFF").length,   lbl:"Equipment Requiring Safety Buyoff", color:"#005c8a"},
     {val:d.filter(r=>r.protag==="WHITE").length,        lbl:"@ WHITE",       color:"#e35205"},
-    {val:d.filter(r=>r.placards==="RECEIVED").length,   lbl:"Placards Rcvd", color:"#3a6018"},
+    {val:d.filter(r=>r.placards==="Final Placard Installed").length,   lbl:"Placards Rcvd", color:"#3a6018"},
   ];
   document.getElementById("kpiRow").innerHTML = kpis.map(k=>
     `<div style="background:#f4f6f8;border-radius:3px;padding:10px 14px;text-align:center">
@@ -696,7 +696,7 @@ function renderAreas() {
     const installer= AREA_INSTALLERS[area]||"";
     const yesC     = items.filter(r=>r.req==="YES").length;
     const sbC      = items.filter(r=>r.req==="SAFETY BUYOFF").length;
-    const plC      = items.filter(r=>r.placards==="RECEIVED").length;
+    const plC      = items.filter(r=>r.placards==="Final Placard Installed").length;
     const ptC      = items.filter(r=>r.protag!=="NOT RECEIVED").length;
     const isColl   = !!collapsedAreas[area];
     const radius   = isColl ? "4px" : "4px 4px 0 0";
@@ -810,7 +810,7 @@ function renderAreas() {
       bodyEl.style.display = "";
       const yesC = items.filter(r=>r.req==="YES").length;
       const sbC  = items.filter(r=>r.req==="SAFETY BUYOFF").length;
-      const plC  = items.filter(r=>r.placards==="RECEIVED").length;
+      const plC  = items.filter(r=>r.placards==="Final Placard Installed").length;
       const ptC  = items.filter(r=>r.protag!=="NOT RECEIVED").length;
       let rows = "";
       items.forEach((row, i) => {
@@ -1075,7 +1075,7 @@ function renderProgress() {
   setEl("greenStat",   d.filter(r=>r.protag==="GREEN" || r.sb===true).length);
 
   // Update ECPL placard bar
-  const rcv    = d.filter(r=>r.placards==="RECEIVED").length;
+  const rcv    = d.filter(r=>r.placards==="Final Placard Installed").length;
   const plPct  = total ? Math.round(rcv/total*100) : 0;
   const plFill = document.getElementById("ecplBarFill");
   const plLbl  = document.getElementById("ecplBarLabel");
@@ -1083,7 +1083,7 @@ function renderProgress() {
   const plOut  = document.getElementById("plOutStat");
   if(plFill) {
     plFill.style.width=plPct+"%";
-    plFill.innerHTML=plPct>5?`<span class="prog-bar-label">${rcv} of ${total} placards received — ${plPct}%</span>`:"";
+    plFill.innerHTML=plPct>5?`<span class="prog-bar-label">${rcv} of ${total} final placards installed — ${plPct}%</span>`:"";
   }
   if(plLbl) { plLbl.style.display="none"; }
   if(plRcv)  plRcv.textContent = rcv;
