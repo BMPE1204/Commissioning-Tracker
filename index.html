@@ -117,20 +117,33 @@ textarea.comment-edit{font-size:11px;padding:4px 6px;border:1px solid #f0a500;bo
 
 
 
-<!-- SEQUENCE BANNER — commissioning after PINK -->
-<div style="background:#fff3cd;border-left:4px solid #e35205;padding:10px 24px;font-size:12px;color:#7a5200;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-  <strong>⚠ SEQUENCE:</strong>
-  <span style="background:#00263a;color:#fff;border-radius:10px;padding:2px 8px;font-size:10px;font-weight:700">1. Install</span> →
-  <span style="background:#f0f0f0;color:#333;border-radius:10px;padding:2px 8px;font-size:10px;font-weight:700;border:1px solid #ccc">2. White ProTag</span> →
-  <span style="background:#ffc0cb;color:#7a0000;border-radius:10px;padding:2px 8px;font-size:10px;font-weight:700;border:1px solid #f09595">3. Pink ProTag</span> →
-  <span style="background:#009ade;color:#fff;border-radius:10px;padding:2px 8px;font-size:10px;font-weight:700">4. Gresham Smith Commissioning</span> →
-  <span style="background:#ffff00;color:#7a5200;border-radius:10px;padding:2px 8px;font-size:10px;font-weight:700;border:1px solid #f5c842">5. Yellow ProTag</span> →
-  <span style="background:#92d050;color:#1a3a00;border-radius:10px;padding:2px 8px;font-size:10px;font-weight:700;border:1px solid #5a9e1a">6. Green ProTag</span>
-  &nbsp;<strong>— Commissioning begins after Pink ProTag, not Green</strong>
+<div style="padding:0 20px 16px;background:#fff;border-bottom:1px solid #e1e4e8">
+  <div class="prog-card">
+    <div class="prog-title">Commissioning Sequence</div>
+    <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:2px">
+      <span style="background:#00263a;color:#fff;border-radius:10px;padding:3px 10px;font-size:10px;font-weight:700">1. Install</span>
+      <span style="color:#6b7a8d;font-weight:700">&#8594;</span>
+      <span style="background:#f0f0f0;color:#333;border-radius:10px;padding:3px 10px;font-size:10px;font-weight:700;border:1px solid #ccc">2. White ProTag</span>
+      <span style="color:#6b7a8d;font-weight:700">&#8594;</span>
+      <span style="background:#ffc0cb;color:#7a0000;border-radius:10px;padding:3px 10px;font-size:10px;font-weight:700;border:1px solid #f09595">3. Pink ProTag</span>
+      <span style="color:#6b7a8d;font-weight:700">&#8594;</span>
+      <span style="background:#009ade;color:#fff;border-radius:10px;padding:3px 10px;font-size:10px;font-weight:700">4. Gresham Smith Commissioning</span>
+      <span style="color:#6b7a8d;font-weight:700">&#8594;</span>
+      <span style="background:#7b4fa6;color:#fff;border-radius:10px;padding:3px 10px;font-size:10px;font-weight:700">5. Pre-Functional Checklist (PFC)</span>
+      <span style="color:#6b7a8d;font-weight:700">&#8594;</span>
+      <span style="background:#e35205;color:#fff;border-radius:10px;padding:3px 10px;font-size:10px;font-weight:700">6. Functional Performance Test (FPT)</span>
+      <span style="color:#6b7a8d;font-weight:700">&#8594;</span>
+      <span style="background:#ffff00;color:#7a5200;border-radius:10px;padding:3px 10px;font-size:10px;font-weight:700;border:1px solid #f5c842">7. Yellow ProTag</span>
+      <span style="color:#6b7a8d;font-weight:700">&#8594;</span>
+      <span style="background:#92d050;color:#1a3a00;border-radius:10px;padding:3px 10px;font-size:10px;font-weight:700;border:1px solid #5a9e1a">8. Green ProTag</span>
+    </div>
+  </div>
 </div>
 
+
+
 <!-- KPIs -->
-<div id="kpiRow" style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding:14px 24px;background:#fff;border-bottom:1px solid #d0d9e0"></div>
+
 
 <!-- TOOLBAR -->
 <div style="display:flex;align-items:center;gap:10px;padding:10px 24px;background:#fff;border-bottom:1px solid #d0d9e0;flex-wrap:wrap" class="no-print">
@@ -371,7 +384,7 @@ textarea.comment-edit{font-size:11px;padding:4px 6px;border:1px solid #f0a500;bo
 // DATA
 // ============================================================
 const PROTAG_OPTS  = ["NOT RECEIVED","WHITE","PINK","YELLOW","GREEN"];
-const STATUS_OPTS  = ["NOT RECEIVED","Draft Received","Draft Installed","Final Placard Installed"];
+const STATUS_OPTS  = ["NOT RECEIVED","DRAFT RECEIVED","DRAFT INSTALLED","FINAL PLACARD INSTALLED"];
 const collapsedAreas = {"Angled Docks":true,"Restroom Rebuilds":true,"EV Charging Canopy":true,"Low Boy Docks":true,"MiniMart":true,"10K":true,"30K":true};
 const AREA_ORDER   = ["Angled Docks","Restroom Rebuilds","EV Charging Canopy","Low Boy Docks","MiniMart","10K","30K"];
 const AREA_COLORS  = {"Angled Docks":"#c40d3c","Restroom Rebuilds":"#e35205","EV Charging Canopy":"#e35205","Low Boy Docks":"#ba7517","MiniMart":"#ba7517","10K":"#185fa5","30K":"#185fa5"};
@@ -421,35 +434,35 @@ const PHASE_ITEMS = {
 const SK = "ford_lap_protag_v6";
 
 const INITIAL_DATA = [
-  {id:"eq_26",name:"UH-R/18-08",area:"Angled Docks",disc:"MECHANICAL",req:"YES",protag:"WHITE",placards:"RECEIVED",inst_by:"Best Mechanical",start:"06/12/26",sc:"06/29/26",sc_raw:"2026-06-29",comments:"",checks:{}},
-  {id:"eq_27",name:"Door-78",area:"Angled Docks",disc:"Overhead Doors",req:"YES",protag:"NOT RECEIVED",placards:"RECEIVED",inst_by:"Rite-Hite",start:"06/19/26",sc:"06/29/26",sc_raw:"2026-06-29",comments:"",checks:{}},
-  {id:"eq_28",name:"Door-79",area:"Angled Docks",disc:"Overhead Doors",req:"YES",protag:"NOT RECEIVED",placards:"RECEIVED",inst_by:"Rite-Hite",start:"06/19/26",sc:"06/29/26",sc_raw:"2026-06-29",comments:"",checks:{}},
+  {id:"eq_26",name:"UH-R/18-08",area:"Angled Docks",disc:"MECHANICAL",req:"YES",protag:"WHITE",placards:"NOT RECEIVED",inst_by:"Best Mechanical",start:"06/12/26",sc:"06/29/26",sc_raw:"2026-06-29",comments:"",checks:{}},
+  {id:"eq_27",name:"Door-78",area:"Angled Docks",disc:"Overhead Doors",req:"YES",protag:"NOT RECEIVED",placards:"NOT RECEIVED",inst_by:"Rite-Hite",start:"06/19/26",sc:"06/29/26",sc_raw:"2026-06-29",comments:"",checks:{}},
+  {id:"eq_28",name:"Door-79",area:"Angled Docks",disc:"Overhead Doors",req:"YES",protag:"NOT RECEIVED",placards:"NOT RECEIVED",inst_by:"Rite-Hite",start:"06/19/26",sc:"06/29/26",sc_raw:"2026-06-29",comments:"",checks:{}},
   {id:"eq_70",name:"EF-K/25-1-01",area:"Restroom Rebuilds",disc:"MECHANICAL",req:"SAFETY BUYOFF",protag:"NOT RECEIVED",placards:"NOT RECEIVED",inst_by:"Best Mechanical",start:"07/02/26",sc:"07/02/26",sc_raw:"2026-07-02",comments:"",checks:{}},
   {id:"eq_71",name:"WHP-K/25-1-01",area:"Restroom Rebuilds",disc:"MECHANICAL",req:"SAFETY BUYOFF",protag:"NOT RECEIVED",placards:"NOT RECEIVED",inst_by:"Best Mechanical",start:"07/02/26",sc:"07/02/26",sc_raw:"2026-07-02",comments:"",checks:{}},
   {id:"eq_72",name:"WHP-K/25-2-01",area:"Restroom Rebuilds",disc:"MECHANICAL",req:"SAFETY BUYOFF",protag:"NOT RECEIVED",placards:"NOT RECEIVED",inst_by:"Best Mechanical",start:"07/02/26",sc:"07/02/26",sc_raw:"2026-07-02",comments:"",checks:{}},
   {id:"eq_73",name:"Water Heater-K/25",area:"Restroom Rebuilds",disc:"MECHANICAL",req:"SAFETY BUYOFF",protag:"NOT RECEIVED",placards:"NOT RECEIVED",inst_by:"Best Mechanical",start:"07/02/26",sc:"07/02/26",sc_raw:"2026-07-02",comments:"",checks:{}},
-  {id:"eq_124",name:"HVS-T-EV01-PRI",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
-  {id:"eq_125",name:"HVS-T-EV02-PRI",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
-  {id:"eq_126",name:"T-EV01",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
-  {id:"eq_127",name:"T-EV02",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
-  {id:"eq_128",name:"MAIN-EV01",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
-  {id:"eq_130",name:"MAIN-EV02",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
-  {id:"eq_138",name:"EVC-01",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
-  {id:"eq_139",name:"EVC-02",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
-  {id:"eq_140",name:"EVC-03",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
-  {id:"eq_141",name:"EVC-04",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
-  {id:"eq_142",name:"EVC-05",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
-  {id:"eq_143",name:"EVC-06",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
-  {id:"eq_144",name:"EVC-07",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
-  {id:"eq_145",name:"EVC-08",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
-  {id:"eq_146",name:"EVC-09",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
-  {id:"eq_147",name:"EVC-10",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
-  {id:"eq_148",name:"EVC-11",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
-  {id:"eq_149",name:"EVC-12",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
-  {id:"eq_150",name:"EVC-13",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
-  {id:"eq_151",name:"EVC-14",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
-  {id:"eq_152",name:"EVC-15",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
-  {id:"eq_153",name:"EVC-16",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
+  {id:"eq_124",name:"HVS-T-EV01-PRI",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"NOT RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
+  {id:"eq_125",name:"HVS-T-EV02-PRI",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"NOT RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
+  {id:"eq_126",name:"T-EV01",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"NOT RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
+  {id:"eq_127",name:"T-EV02",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"NOT RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
+  {id:"eq_128",name:"MAIN-EV01",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"NOT RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
+  {id:"eq_130",name:"MAIN-EV02",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"NOT RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
+  {id:"eq_138",name:"EVC-01",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"NOT RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
+  {id:"eq_139",name:"EVC-02",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"NOT RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
+  {id:"eq_140",name:"EVC-03",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"NOT RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
+  {id:"eq_141",name:"EVC-04",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"NOT RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
+  {id:"eq_142",name:"EVC-05",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"NOT RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
+  {id:"eq_143",name:"EVC-06",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"NOT RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
+  {id:"eq_144",name:"EVC-07",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"NOT RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
+  {id:"eq_145",name:"EVC-08",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"NOT RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
+  {id:"eq_146",name:"EVC-09",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"NOT RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
+  {id:"eq_147",name:"EVC-10",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"NOT RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
+  {id:"eq_148",name:"EVC-11",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"NOT RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
+  {id:"eq_149",name:"EVC-12",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"NOT RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
+  {id:"eq_150",name:"EVC-13",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"NOT RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
+  {id:"eq_151",name:"EVC-14",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"NOT RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
+  {id:"eq_152",name:"EVC-15",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"NOT RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
+  {id:"eq_153",name:"EVC-16",area:"EV Charging Canopy",disc:"ELECTRICAL",req:"YES",protag:"WHITE",placards:"NOT RECEIVED",inst_by:"Payne Crest",start:"07/06/26",sc:"07/06/26",sc_raw:"2026-07-06",comments:"",checks:{}},
   {id:"eq_75",name:"WHP-J/35-1-06",area:"MiniMart",disc:"MECHANICAL",req:"SAFETY BUYOFF",protag:"NOT RECEIVED",placards:"NOT RECEIVED",inst_by:"Best Mechanical",start:"09/04/26",sc:"10/15/26",sc_raw:"2026-10-15",comments:"",checks:{}},
   {id:"eq_76",name:"WHP-J/35-2-06",area:"MiniMart",disc:"MECHANICAL",req:"SAFETY BUYOFF",protag:"NOT RECEIVED",placards:"NOT RECEIVED",inst_by:"Best Mechanical",start:"09/04/26",sc:"10/15/26",sc_raw:"2026-10-15",comments:"",checks:{}},
   {id:"eq_55",name:"Door-90",area:"Low Boy Docks",disc:"Overhead Doors",req:"YES",protag:"NOT RECEIVED",placards:"NOT RECEIVED",inst_by:"Rite-Hite",start:"09/17/26",sc:"10/15/26",sc_raw:"2026-10-15",comments:"",checks:{}},
@@ -663,7 +676,7 @@ function renderKPIs() {
     {val:d.filter(r=>r.req==="YES").length,             lbl:"ProTag",    color:"#c40d3c"},
     {val:d.filter(r=>r.req==="SAFETY BUYOFF").length,   lbl:"Equipment Requiring Safety Buyoff", color:"#005c8a"},
     {val:d.filter(r=>r.protag==="WHITE").length,        lbl:"@ WHITE",       color:"#e35205"},
-    {val:d.filter(r=>r.placards==="Final Placard Installed").length,   lbl:"Placards Rcvd", color:"#3a6018"},
+    {val:d.filter(r=>r.placards==="FINAL PLACARD INSTALLED").length,   lbl:"Placards Rcvd", color:"#3a6018"},
   ];
   document.getElementById("kpiRow").innerHTML = kpis.map(k=>
     `<div style="background:#f4f6f8;border-radius:3px;padding:10px 14px;text-align:center">
@@ -696,7 +709,7 @@ function renderAreas() {
     const installer= AREA_INSTALLERS[area]||"";
     const yesC     = items.filter(r=>r.req==="YES").length;
     const sbC      = items.filter(r=>r.req==="SAFETY BUYOFF").length;
-    const plC      = items.filter(r=>r.placards==="Final Placard Installed").length;
+    const plC      = items.filter(r=>r.placards==="FINAL PLACARD INSTALLED").length;
     const ptC      = items.filter(r=>r.protag!=="NOT RECEIVED").length;
     const isColl   = !!collapsedAreas[area];
     const radius   = isColl ? "4px" : "4px 4px 0 0";
@@ -723,8 +736,8 @@ function renderAreas() {
         const typeCell = locked
           ? reqBadge(row.req)
           : `<select class="edit-sel" onchange="updReq('${row.id}',this.value)">
-              <option${row.req==='YES'?' selected':''}>YES</option>
-              <option${row.req==='SAFETY BUYOFF'?' selected':''}>SAFETY BUYOFF</option>
+              <option value="YES"${row.req==='YES'?' selected':''}>ProTag</option>
+              <option value="SAFETY BUYOFF"${row.req==='SAFETY BUYOFF'?' selected':''}>Safety Buyoff</option>
             </select>`;
         // ProTag status cell — always show dropdown when unlocked regardless of type
         const protagCell = locked
@@ -810,7 +823,7 @@ function renderAreas() {
       bodyEl.style.display = "";
       const yesC = items.filter(r=>r.req==="YES").length;
       const sbC  = items.filter(r=>r.req==="SAFETY BUYOFF").length;
-      const plC  = items.filter(r=>r.placards==="Final Placard Installed").length;
+      const plC  = items.filter(r=>r.placards==="FINAL PLACARD INSTALLED").length;
       const ptC  = items.filter(r=>r.protag!=="NOT RECEIVED").length;
       let rows = "";
       items.forEach((row, i) => {
@@ -819,8 +832,8 @@ function renderAreas() {
         const typeCell = locked
           ? reqBadge(row.req)
           : `<select class="edit-sel" onchange="updReq('${row.id}',this.value)">
-              <option${row.req==='YES'?' selected':''}>YES</option>
-              <option${row.req==='SAFETY BUYOFF'?' selected':''}>SAFETY BUYOFF</option>
+              <option value="YES"${row.req==='YES'?' selected':''}>ProTag</option>
+              <option value="SAFETY BUYOFF"${row.req==='SAFETY BUYOFF'?' selected':''}>Safety Buyoff</option>
             </select>`;
         // ProTag status cell — always show dropdown when unlocked regardless of type
         const protagCell = locked
@@ -905,7 +918,6 @@ function updSB(id, checked) {
     row.sb = checked;
     schedSave();
     renderAreas();
-    renderKPIs();
     renderProgress();
   }
 }
@@ -960,7 +972,6 @@ function upd(id, field, value) {
     row[field] = value;
     schedSave();
     renderAreas();
-    renderKPIs();
     renderProgress();
   }
 }
@@ -972,7 +983,6 @@ function toggleCheck(id, checkKey, idx, checked) {
   row.checks[checkKey][idx] = checked;
   schedSave();
   renderProgress();
-  renderKPIs();
   renderAreas();
 }
 
@@ -1022,7 +1032,6 @@ async function initApp() {
   await loadAgenda();
   loadFptData();
   AREA_ORDER.forEach(a => collapsedAreas[a] = true);
-  renderKPIs();
   renderAreas();
   renderAgenda();
   renderProgress();  // Always runs last so data is fully ready
@@ -1075,7 +1084,7 @@ function renderProgress() {
   setEl("greenStat",   d.filter(r=>r.protag==="GREEN" || r.sb===true).length);
 
   // Update ECPL placard bar
-  const rcv    = d.filter(r=>r.placards==="Final Placard Installed").length;
+  const rcv    = d.filter(r=>r.placards==="FINAL PLACARD INSTALLED").length;
   const plPct  = total ? Math.round(rcv/total*100) : 0;
   const plFill = document.getElementById("ecplBarFill");
   const plLbl  = document.getElementById("ecplBarLabel");
