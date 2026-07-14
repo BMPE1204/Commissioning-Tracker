@@ -719,28 +719,47 @@ function renderAreas() {
       let rows = "";
       items.forEach((row, i) => {
         const bg = i%2===0 ? "" : "background:rgba(165,186,201,0.1);";
-        const protagCell = row.req === "SAFETY BUYOFF"
-          ? `<span style="font-size:10px;color:#6b7a8d;font-style:italic">N/A — Safety Buyoff</span>`
-          : locked
-            ? protagBadge(row.protag)
-            : `<select class="edit-sel" onchange="upd('${row.id}','protag',this.value)">${PROTAG_OPTS.map(o=>`<option${o===row.protag?" selected":""}>${o}</option>`).join("")}</select>`;
+        // Type (req) cell
+        const typeCell = locked
+          ? reqBadge(row.req)
+          : `<select class="edit-sel" onchange="updReq('${row.id}',this.value)">
+              <option${row.req==='YES'?' selected':''}>YES</option>
+              <option${row.req==='SAFETY BUYOFF'?' selected':''}>SAFETY BUYOFF</option>
+            </select>`;
+        // ProTag status cell — always show dropdown when unlocked regardless of type
+        const protagCell = locked
+          ? (row.req==="SAFETY BUYOFF" ? `<span style="font-size:10px;color:#6b7a8d;font-style:italic">N/A</span>` : protagBadge(row.protag))
+          : `<select class="edit-sel" onchange="upd('${row.id}','protag',this.value)">${PROTAG_OPTS.map(o=>`<option${o===row.protag?" selected":""}>${o}</option>`).join("")}</select>`;
         const placardCell = locked
           ? statusBadge(row.placards)
           : `<select class="edit-sel" onchange="upd('${row.id}','placards',this.value)">${STATUS_OPTS.map(o=>`<option${o===row.placards?" selected":""}>${o}</option>`).join("")}</select>`;
         const commentCell = locked
           ? `<span style="font-size:11px;color:#4f758b;font-style:${row.comments?"normal":"italic"}">${row.comments||"—"}</span>`
           : `<textarea class="comment-edit" onchange="upd('${row.id}','comments',this.value)">${row.comments||""}</textarea>`;
+        const nameCell = locked
+          ? `<span style="font-size:12px;font-weight:600;color:#00263a">${row.name}</span>`
+          : `<input type="text" value="${row.name.replace(/"/g,'&quot;')}" onchange="upd('${row.id}','name',this.value)" style="font-size:11px;padding:3px 5px;border:1px solid #f0a500;border-radius:3px;background:#fff8e1;width:100%;font-weight:600;color:#00263a">`;
+        const discCell = locked
+          ? `<span style="font-size:11px;color:#4f758b">${row.disc}</span>`
+          : `<select class="edit-sel" onchange="upd('${row.id}','disc',this.value)">
+              ${['ELECTRICAL','MECHANICAL','Overhead Doors','CONTROLS','OTHER'].map(o=>`<option${o===row.disc?' selected':''}>${o}</option>`).join('')}
+            </select>`;
+        const instCell = locked
+          ? `<span style="font-size:11px;color:#4f758b">${row.inst_by}</span>`
+          : `<input type="text" value="${(row.inst_by||'').replace(/"/g,'&quot;')}" onchange="upd('${row.id}','inst_by',this.value)" style="font-size:11px;padding:3px 5px;border:1px solid #f0a500;border-radius:3px;background:#fff8e1;width:100%">`;
+        const delCell = locked ? '' : `<td style="padding:4px 6px;border-bottom:0.5px solid #d0d9e0;text-align:center"><button onclick="delEquip('${row.id}')" style="background:#fff;color:#c40d3c;border:1px solid #c40d3c;border-radius:3px;font-size:10px;font-weight:700;padding:2px 7px;cursor:pointer">✕</button></td>`;
         rows += `<tr style="${bg}">
-          <td style="padding:7px 10px;border-bottom:0.5px solid #d0d9e0;font-size:12px;font-weight:600;color:#00263a;white-space:nowrap">${row.name}</td>
-          <td style="padding:7px 10px;border-bottom:0.5px solid #d0d9e0;font-size:11px;color:#4f758b">${row.disc}</td>
-          <td style="padding:7px 10px;border-bottom:0.5px solid #d0d9e0">${reqBadge(row.req)}</td>
+          <td style="padding:7px 10px;border-bottom:0.5px solid #d0d9e0">${nameCell}</td>
+          <td style="padding:7px 10px;border-bottom:0.5px solid #d0d9e0">${discCell}</td>
+          <td style="padding:7px 10px;border-bottom:0.5px solid #d0d9e0">${typeCell}</td>
           <td style="padding:7px 10px;border-bottom:0.5px solid #d0d9e0">${protagCell}</td>
           <td style="padding:7px 10px;border-bottom:0.5px solid #d0d9e0">${placardCell}</td>
-          <td style="padding:7px 10px;border-bottom:0.5px solid #d0d9e0;font-size:11px;color:#4f758b;white-space:nowrap">${row.inst_by}</td>
+          <td style="padding:7px 10px;border-bottom:0.5px solid #d0d9e0">${instCell}</td>
           <td style="padding:7px 10px;border-bottom:0.5px solid #d0d9e0;font-size:11px;color:#4f758b;white-space:nowrap">${row.start}</td>
           <td style="padding:7px 10px;border-bottom:0.5px solid #d0d9e0;font-size:11px;font-weight:600;color:#00263a;white-space:nowrap">${row.sc}</td>
           <td style="padding:7px 10px;border-bottom:0.5px solid #d0d9e0">${phaseChecklistHtml(row)}</td>
           <td style="padding:7px 10px;border-bottom:0.5px solid #d0d9e0">${commentCell}</td>
+          ${delCell}
         </tr>`;
       });
 
@@ -749,7 +768,7 @@ function renderAreas() {
         <div style="overflow-x:auto">
         <table style="width:100%;border-collapse:collapse;min-width:900px">
           <thead><tr style="background:#1565c0">
-            <th style="padding:8px 10px;color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;text-align:left;width:13%">Equipment</th>
+            <th style="padding:8px 10px;color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;text-align:left;width:12%">Equipment</th>
             <th style="padding:8px 10px;color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;text-align:left;width:9%">Discipline</th>
             <th style="padding:8px 10px;color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;text-align:left;width:9%">Type</th>
             <th style="padding:8px 10px;color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;text-align:left;width:9%">ProTag Status</th>
@@ -757,11 +776,14 @@ function renderAreas() {
             <th style="padding:8px 10px;color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;text-align:left;width:9%">Installer</th>
             <th style="padding:8px 10px;color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;text-align:left;width:6%">Start</th>
             <th style="padding:8px 10px;color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;text-align:left;width:6%">Turnover Date</th>
-            <th style="padding:8px 10px;color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;text-align:left;width:18%">Phase Checklist</th>
-            <th style="padding:8px 10px;color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;text-align:left;width:12%">Comments</th>
+            <th style="padding:8px 10px;color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;text-align:left;width:15%">Phase Checklist</th>
+            <th style="padding:8px 10px;color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;text-align:left;width:10%">Comments</th>
+            ${locked?'':'<th style="padding:8px 10px;color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;text-align:center;width:4%"></th>'}
           </tr></thead>
           <tbody>${rows}</tbody>
-        </table></div></div>`;
+        </table></div>
+        ${locked?'':'<div style="padding:8px 12px;border-top:1px solid #e8edf0"><button onclick="addEquip(\'' + area + '\')" style="background:#1565c0;color:#fff;border:none;border-radius:4px;font-size:11px;font-weight:700;padding:6px 14px;cursor:pointer">+ Add Equipment</button></div>'}
+        </div>`;
     }
 
     out += `</div><div style="height:12px"></div>`;
@@ -793,28 +815,47 @@ function renderAreas() {
       let rows = "";
       items.forEach((row, i) => {
         const bg = i%2===0 ? "" : "background:rgba(165,186,201,0.1);";
-        const protagCell = row.req === "SAFETY BUYOFF"
-          ? `<span style="font-size:10px;color:#6b7a8d;font-style:italic">N/A — Safety Buyoff</span>`
-          : locked
-            ? protagBadge(row.protag)
-            : `<select class="edit-sel" onchange="upd('${row.id}','protag',this.value)">${PROTAG_OPTS.map(o=>`<option${o===row.protag?" selected":""}>${o}</option>`).join("")}</select>`;
+        // Type (req) cell
+        const typeCell = locked
+          ? reqBadge(row.req)
+          : `<select class="edit-sel" onchange="updReq('${row.id}',this.value)">
+              <option${row.req==='YES'?' selected':''}>YES</option>
+              <option${row.req==='SAFETY BUYOFF'?' selected':''}>SAFETY BUYOFF</option>
+            </select>`;
+        // ProTag status cell — always show dropdown when unlocked regardless of type
+        const protagCell = locked
+          ? (row.req==="SAFETY BUYOFF" ? `<span style="font-size:10px;color:#6b7a8d;font-style:italic">N/A</span>` : protagBadge(row.protag))
+          : `<select class="edit-sel" onchange="upd('${row.id}','protag',this.value)">${PROTAG_OPTS.map(o=>`<option${o===row.protag?" selected":""}>${o}</option>`).join("")}</select>`;
         const placardCell = locked
           ? statusBadge(row.placards)
           : `<select class="edit-sel" onchange="upd('${row.id}','placards',this.value)">${STATUS_OPTS.map(o=>`<option${o===row.placards?" selected":""}>${o}</option>`).join("")}</select>`;
         const commentCell = locked
           ? `<span style="font-size:11px;color:#4f758b;font-style:${row.comments?"normal":"italic"}">${row.comments||"—"}</span>`
           : `<textarea class="comment-edit" onchange="upd('${row.id}','comments',this.value)">${row.comments||""}</textarea>`;
+        const nameCell = locked
+          ? `<span style="font-size:12px;font-weight:600;color:#00263a">${row.name}</span>`
+          : `<input type="text" value="${row.name.replace(/"/g,'&quot;')}" onchange="upd('${row.id}','name',this.value)" style="font-size:11px;padding:3px 5px;border:1px solid #f0a500;border-radius:3px;background:#fff8e1;width:100%;font-weight:600;color:#00263a">`;
+        const discCell = locked
+          ? `<span style="font-size:11px;color:#4f758b">${row.disc}</span>`
+          : `<select class="edit-sel" onchange="upd('${row.id}','disc',this.value)">
+              ${['ELECTRICAL','MECHANICAL','Overhead Doors','CONTROLS','OTHER'].map(o=>`<option${o===row.disc?' selected':''}>${o}</option>`).join('')}
+            </select>`;
+        const instCell = locked
+          ? `<span style="font-size:11px;color:#4f758b">${row.inst_by}</span>`
+          : `<input type="text" value="${(row.inst_by||'').replace(/"/g,'&quot;')}" onchange="upd('${row.id}','inst_by',this.value)" style="font-size:11px;padding:3px 5px;border:1px solid #f0a500;border-radius:3px;background:#fff8e1;width:100%">`;
+        const delCell = locked ? '' : `<td style="padding:4px 6px;border-bottom:0.5px solid #d0d9e0;text-align:center"><button onclick="delEquip('${row.id}')" style="background:#fff;color:#c40d3c;border:1px solid #c40d3c;border-radius:3px;font-size:10px;font-weight:700;padding:2px 7px;cursor:pointer">✕</button></td>`;
         rows += `<tr style="${bg}">
-          <td style="padding:7px 10px;border-bottom:0.5px solid #d0d9e0;font-size:12px;font-weight:600;color:#00263a;white-space:nowrap">${row.name}</td>
-          <td style="padding:7px 10px;border-bottom:0.5px solid #d0d9e0;font-size:11px;color:#4f758b">${row.disc}</td>
-          <td style="padding:7px 10px;border-bottom:0.5px solid #d0d9e0">${reqBadge(row.req)}</td>
+          <td style="padding:7px 10px;border-bottom:0.5px solid #d0d9e0">${nameCell}</td>
+          <td style="padding:7px 10px;border-bottom:0.5px solid #d0d9e0">${discCell}</td>
+          <td style="padding:7px 10px;border-bottom:0.5px solid #d0d9e0">${typeCell}</td>
           <td style="padding:7px 10px;border-bottom:0.5px solid #d0d9e0">${protagCell}</td>
           <td style="padding:7px 10px;border-bottom:0.5px solid #d0d9e0">${placardCell}</td>
-          <td style="padding:7px 10px;border-bottom:0.5px solid #d0d9e0;font-size:11px;color:#4f758b;white-space:nowrap">${row.inst_by}</td>
+          <td style="padding:7px 10px;border-bottom:0.5px solid #d0d9e0">${instCell}</td>
           <td style="padding:7px 10px;border-bottom:0.5px solid #d0d9e0;font-size:11px;color:#4f758b;white-space:nowrap">${row.start}</td>
           <td style="padding:7px 10px;border-bottom:0.5px solid #d0d9e0;font-size:11px;font-weight:600;color:#00263a;white-space:nowrap">${row.sc}</td>
           <td style="padding:7px 10px;border-bottom:0.5px solid #d0d9e0">${phaseChecklistHtml(row)}</td>
           <td style="padding:7px 10px;border-bottom:0.5px solid #d0d9e0">${commentCell}</td>
+          ${delCell}
         </tr>`;
       });
       bodyEl.innerHTML = `<div style="border:1px solid #e1e4e8;border-top:none;border-radius:0 0 6px 6px;overflow:hidden">
@@ -822,7 +863,7 @@ function renderAreas() {
         <div style="overflow-x:auto">
         <table style="width:100%;border-collapse:collapse;min-width:900px">
           <thead><tr style="background:#1565c0">
-            <th style="padding:8px 10px;color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;text-align:left;width:13%">Equipment</th>
+            <th style="padding:8px 10px;color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;text-align:left;width:12%">Equipment</th>
             <th style="padding:8px 10px;color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;text-align:left;width:9%">Discipline</th>
             <th style="padding:8px 10px;color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;text-align:left;width:9%">Type</th>
             <th style="padding:8px 10px;color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;text-align:left;width:9%">ProTag Status</th>
@@ -830,11 +871,14 @@ function renderAreas() {
             <th style="padding:8px 10px;color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;text-align:left;width:9%">Installer</th>
             <th style="padding:8px 10px;color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;text-align:left;width:6%">Start</th>
             <th style="padding:8px 10px;color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;text-align:left;width:6%">Turnover Date</th>
-            <th style="padding:8px 10px;color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;text-align:left;width:18%">Phase Checklist</th>
-            <th style="padding:8px 10px;color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;text-align:left;width:12%">Comments</th>
+            <th style="padding:8px 10px;color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;text-align:left;width:15%">Phase Checklist</th>
+            <th style="padding:8px 10px;color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;text-align:left;width:10%">Comments</th>
+            ${locked?'':'<th style="padding:8px 10px;color:#fff;font-size:10px;font-weight:700;text-transform:uppercase;text-align:center;width:4%"></th>'}
           </tr></thead>
           <tbody>${rows}</tbody>
-        </table></div></div>`;
+        </table></div>
+        ${locked?'':'<div style="padding:8px 12px;border-top:1px solid #e8edf0"><button onclick="addEquip(\'' + area + '\')" style="background:#1565c0;color:#fff;border:none;border-radius:4px;font-size:11px;font-weight:700;padding:6px 14px;cursor:pointer">+ Add Equipment</button></div>'}
+        </div>`;
     }
   });
 }
@@ -864,6 +908,50 @@ function updSB(id, checked) {
     renderKPIs();
     renderProgress();
   }
+}
+
+function updReq(id, val) {
+  const row = data.find(r=>r.id===id);
+  if(!row) return;
+  row.req = val;
+  // Reset protag to NOT RECEIVED when switching to Safety Buyoff
+  if(val==="SAFETY BUYOFF") { row.protag="NOT RECEIVED"; row.sb=false; }
+  schedSave();
+  renderAreas();
+  renderProgress();
+}
+
+function addEquip(area) {
+  const areaItems = data.filter(r=>r.area===area);
+  const sc = areaItems.length ? areaItems[0].sc : '';
+  const newId = 'eq_custom_' + Date.now();
+  data.push({
+    id: newId,
+    name: 'New Equipment',
+    area: area,
+    disc: 'ELECTRICAL',
+    req: 'YES',
+    protag: 'NOT RECEIVED',
+    placards: 'NOT RECEIVED',
+    inst_by: '',
+    start: '',
+    sc: sc,
+    sc_raw: '',
+    comments: '',
+    checks: {},
+    sb: false
+  });
+  schedSave();
+  renderAreas();
+  renderProgress();
+}
+
+function delEquip(id) {
+  if(!confirm('Delete this equipment item?')) return;
+  data = data.filter(r=>r.id!==id);
+  schedSave();
+  renderAreas();
+  renderProgress();
 }
 
 function upd(id, field, value) {
